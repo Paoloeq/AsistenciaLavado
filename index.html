@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Marcar Asistencia</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 2rem; }
+    select, button { padding: 0.5rem; font-size: 1rem; margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <h2>Registro de Asistencia de Lavado</h2>
+  <select id="nombre" required>
+    <option value="" disabled selected>Selecciona tu nombre</option>
+    <option value="Paolo">Paolo</option>
+    <option value="Marlon">Marlon</option>
+    <option value="Mario">Mario</option>
+  </select>
+
+  <!-- <input type="text" id="nombre" placeholder="Tu nombre" required />
+  <br> -->
+  <button onclick="marcarAsistencia()">Marcar Asistencia</button>
+
+  <p id="mensaje"></p>
+
+  <script>
+    async function marcarAsistencia() {
+        const nombre = document.getElementById("nombre").value;
+        const mensaje = document.getElementById("mensaje");
+
+        if (!nombre) {
+            mensaje.textContent = "Por favor ingresa tu nombre.";
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("nombre", nombre);
+
+        try {
+            const res = await fetch("https://script.google.com/macros/s/AKfycbw8Eb-_l2fYPrx2WNr9rk28ChFDmTpYg1n7jMrwH3x4aoHBsCBZVpok3Lx6xtESFmo/exec", {
+            method: "POST",
+            body: formData
+            });
+
+            const texto = await res.text();
+            mensaje.textContent = texto === "Success" ? "¡Asistencia marcada!" : "Hubo un problema.";
+        } catch (error) {
+            mensaje.textContent = "Error de conexión.";
+            console.error(error);
+        }
+    }
+  </script>
+</body>
+</html>
