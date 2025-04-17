@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marcar Asistencia</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Registro de Asistencia</title>
+  <link rel="stylesheet" href="styles.css?17042025">
 </head>
 <body>
-  <h2>Registro de Asistencia de Lavado</h2>
+  <h2>Registro de Asistencia</h2>
   <select id="nombre" required>
     <option value="" disabled selected>Selecciona tu nombre</option>
     <option value="Paolo">Paolo</option>
@@ -16,43 +16,13 @@
   </select>
 
   <button onclick="marcarAsistencia()" id="btnMarcar">Marcar Asistencia</button>
+  <button onclick="verHistorial()" id="btnHistorial">Ver Registros</button>
+
 
   <p id="mensaje"></p>
+  <div id="historialContainer" style="margin-top: 20px;"></div>
 
-  <script>
-    async function marcarAsistencia() {
-        const nombre = document.getElementById("nombre").value;
-        const mensaje = document.getElementById("mensaje");
-        const btnMarcar = document.getElementById("btnMarcar");
-
-        if (!nombre) {
-            mensaje.textContent = "Por favor selecciona tu nombre.";
-            return;
-        }
-
-        // Deshabilitar el botón y mostrar indicador de carga
-        btnMarcar.disabled = true;
-        mensaje.innerHTML = '<span class="loading"></span>Registrando...';
-
-        const formData = new FormData();
-        formData.append("nombre", nombre);
-
-        try {
-            const res = await fetch("https://script.google.com/macros/s/AKfycbw8Eb-_l2fYPrx2WNr9rk28ChFDmTpYg1n7jMrwH3x4aoHBsCBZVpok3Lx6xtESFmo/exec", {
-              method: "POST",
-              body: formData
-            });
-
-            const texto = await res.text();
-            mensaje.textContent = texto === "Success" ? "¡Asistencia marcada con éxito!" : "Hubo un problema al registrar.";
-        } catch (error) {
-            mensaje.textContent = "Error de conexión. Por favor intenta nuevamente.";
-            console.error(error);
-        } finally {
-            // Rehabilitar el botón independientemente del resultado
-            btnMarcar.disabled = false;
-        }
-    }
-  </script>
+  <script src="script.js"></script>
+    
 </body>
 </html>
