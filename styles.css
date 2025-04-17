@@ -1,0 +1,106 @@
+/* Estilos base (para todos los dispositivos) */
+body {
+    font-family: sans-serif;
+    text-align: center;
+    padding: 1rem;
+    margin: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  select, button {
+    padding: 0.8rem;
+    font-size: 1rem;
+    margin-top: 1rem;
+    width: 90%;
+    max-width: 300px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  button {
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #3367d6;
+  }
+  
+  button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #cccccc;
+  }
+  
+  #mensaje {
+    min-height: 24px;
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+  
+  .loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(0,0,0,.3);
+    border-radius: 50%;
+    border-top-color: #000;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  /* Media queries para dispositivos móviles */
+  @media (max-width: 480px) {
+    body {
+      padding: 0.5rem;
+    }
+    
+    h2 {
+      font-size: 1.3rem;
+      margin: 1rem 0;
+    }
+    
+    select, button {
+      padding: 0.7rem;
+      font-size: 0.9rem;
+      width: 95%;
+    }
+    
+    #mensaje {
+      font-size: 0.9rem;
+      margin-top: 1rem;
+    }
+    
+    .loading {
+      width: 16px;
+      height: 16px;
+      border-width: 2px;
+    }
+  }
+  
+  /* Media queries para tablets y pantallas medianas */
+  @media (min-width: 481px) and (max-width: 768px) {
+    body {
+      padding: 1.5rem;
+    }
+    
+    select, button {
+      width: 80%;
+    }
+  }

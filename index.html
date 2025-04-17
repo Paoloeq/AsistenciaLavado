@@ -3,10 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Marcar Asistencia</title>
-  <style>
-    body { font-family: sans-serif; text-align: center; padding: 2rem; }
-    select, button { padding: 0.5rem; font-size: 1rem; margin-top: 1rem; }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <h2>Registro de Asistencia de Lavado</h2>
@@ -17,9 +14,7 @@
     <option value="Mario">Mario</option>
   </select>
 
-  <!-- <input type="text" id="nombre" placeholder="Tu nombre" required />
-  <br> -->
-  <button onclick="marcarAsistencia()">Marcar Asistencia</button>
+  <button onclick="marcarAsistencia()" id="btnMarcar">Marcar Asistencia</button>
 
   <p id="mensaje"></p>
 
@@ -27,26 +22,34 @@
     async function marcarAsistencia() {
         const nombre = document.getElementById("nombre").value;
         const mensaje = document.getElementById("mensaje");
+        const btnMarcar = document.getElementById("btnMarcar");
 
         if (!nombre) {
-            mensaje.textContent = "Por favor ingresa tu nombre.";
+            mensaje.textContent = "Por favor selecciona tu nombre.";
             return;
         }
+
+        // Deshabilitar el botón y mostrar indicador de carga
+        btnMarcar.disabled = true;
+        mensaje.innerHTML = '<span class="loading"></span>Registrando...';
 
         const formData = new FormData();
         formData.append("nombre", nombre);
 
         try {
             const res = await fetch("https://script.google.com/macros/s/AKfycbw8Eb-_l2fYPrx2WNr9rk28ChFDmTpYg1n7jMrwH3x4aoHBsCBZVpok3Lx6xtESFmo/exec", {
-            method: "POST",
-            body: formData
+              method: "POST",
+              body: formData
             });
 
             const texto = await res.text();
-            mensaje.textContent = texto === "Success" ? "¡Asistencia marcada!" : "Hubo un problema.";
+            mensaje.textContent = texto === "Success" ? "¡Asistencia marcada con éxito!" : "Hubo un problema al registrar.";
         } catch (error) {
-            mensaje.textContent = "Error de conexión.";
+            mensaje.textContent = "Error de conexión. Por favor intenta nuevamente.";
             console.error(error);
+        } finally {
+            // Rehabilitar el botón independientemente del resultado
+            btnMarcar.disabled = false;
         }
     }
   </script>
