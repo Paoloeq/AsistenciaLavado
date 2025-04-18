@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbxO5i-WcUsy__BaFnmXmUcDPLXxxoubyP_nJIBP46j551hA-0r0UQfEHQ4bmWNj1gEunw/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbwo60QwGnbeZ2o7KGGHuRF8pRfEQlMseK71EW0bTBNv7yDq-TYJDmBOZkh5wIai7UdNEg/exec";
     
     async function marcarAsistencia() {
         const nombre = document.getElementById("nombre").value;
